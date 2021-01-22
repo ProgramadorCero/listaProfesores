@@ -127,5 +127,8 @@
       }
     }
   },
-  "defaultProject": "listaprofesores"
+  "defaultProject": "listaprofesores",
+  "cli": {
+    "analytics": "48cb38f3-f0da-4f3b-bb9a-ffee0f19bc0c"
+  }
 }
