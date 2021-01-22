@@ -1,0 +1,49 @@
+.contenedor
+{
+    display: grid;
+    .login
+    {
+
+        margin: auto;
+        width: 40%;
+        padding: 30px 20px;
+        border: 1px solid black;
+        .formularioContenedor-item
+        {
+            display: grid;
+        }
+        h1
+        {
+            font-size: 1.2rem;
+            margin: 0px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+    }
+
+    .botonesFormulario
+    {
+        margin-top: 10px;
+    }
+
+}
+
+.formularioContenedor
+{
+    display: flex;
+    flex-direction: column;
+}
+
+@media  (max-width: 584px)
+{
+    .contenedor
+    {
+        width: 100%;
+        .login
+        {
+            width: 85%;
+            margin: auto;
+            padding: 20px;
+        }
+    }
+}

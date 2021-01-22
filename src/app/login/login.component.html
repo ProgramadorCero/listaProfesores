@@ -1,1 +1,38 @@
-<p>login works!</p>
+<div class="contenedor">
+
+    <div class="imagenCentral">
+
+    </div>
+
+    <div class="login">
+        <form [formGroup]="formularioLogin" (submit)="obtenerDatosFormularioLogin(formularioLogin)">
+            <div class="formularioContenedor">
+
+                <div>
+                    <h1>INICIAR SECCIÓN</h1>
+                </div>
+
+                <div class="formularioContenedor-item">
+                    <label for="identificacion">Documento de identificación</label>
+                    <input
+                    type="number"
+                    formControlName="identificacion"
+                    id="identificacion">
+                </div>
+
+                <div class="formularioContenedor-item">
+                    <label for="password">Contraseña</label>
+                    <input
+                    type="password"
+                    formControlName="password"
+                    id="password">
+                </div>
+                <div class="botonesFormulario">
+                    <button type="submit">Ingresar</button>
+                    <button type="button" (click)="agregarUsuario()">Registrar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
