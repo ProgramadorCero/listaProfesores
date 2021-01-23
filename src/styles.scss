@@ -9,6 +9,16 @@
  * 2. Prevent adjustments of font size after orientation changes in iOS.
  */
 
+  @font-face{
+    src: url(./familyFont/Poppins-Regular.ttf);
+    font-family: 'Poppins';
+  }
+
+*
+{
+  font-family: 'Poppins','Times New Roman', Times, serif,'Courier New', Courier, monospace;
+}
+
 html {
   line-height: 1.15; /* 1 */
   -webkit-text-size-adjust: 100%; /* 2 */
@@ -352,5 +362,57 @@ template {
 p, h1, h2, h3, h4, h5, h6
 {
     margin: 0px;
-    font-family: 'Times New Roman', Times, serif,'Courier New', Courier, monospace;
+    font-family: 'Poppins','Times New Roman', Times, serif,'Courier New', Courier, monospace;
 }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+.buttonGrey {
+	box-shadow:inset 0px 1px 3px 0px #91b8b3;
+	background:linear-gradient(to bottom, #768d87 5%, #6c7c7c 100%);
+	background-color:#768d87;
+	border-radius:5px;
+	border:1px solid #566963;
+	cursor:pointer;
+	color:#ffffff;
+	font-size:14px;
+	font-weight:bold;
+	padding:11px 15px;
+	text-decoration:none;
+	text-shadow:0px -1px 0px #2b665e;
+}
+.buttonGrey:hover {
+	background:linear-gradient(to bottom, #6c7c7c 5%, #768d87 100%);
+	background-color:#6c7c7c;
+}
+.buttonGrey:active {
+	position:relative;
+	top:1px;
+}
+
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+.textbox {
+  padding: 8px ;
+  height: auto;
+  background: #f2f2f2;
+  color: #333;
+  border: none;
+  border-bottom: 1px solid #999;
+  border-radius: 1px;
+  font-size: 15px;
+  outline: none;
+  -webkit-transition: all 250ms ease-in;
+  -moz-transition: all 250ms ease-in;
+  -ms-transition: all 250ms ease-in;
+  -o-transition: all 250ms ease-in;
+  transition: all 250ms ease-in;
+}
+.textbox:focus {
+  background: #f9f9f9;
+  border-bottom: 1px solid #333;
+}
+

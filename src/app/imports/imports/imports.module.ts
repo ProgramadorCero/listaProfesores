@@ -7,6 +7,9 @@ import {HttpClientModule} from '@angular/common/http';
 // Modulos Formularios
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+// Angular material
+import {MatDialogModule} from '@angular/material/dialog';
+
 
 @NgModule({
   declarations: [],
@@ -14,12 +17,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatDialogModule
   ],
   exports: [
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatDialogModule
   ]
 })
 export class ImportsModule { }

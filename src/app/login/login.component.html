@@ -15,6 +15,7 @@
                 <div class="formularioContenedor-item">
                     <label for="identificacion">Documento de identificación</label>
                     <input
+                    class="textbox"
                     type="number"
                     formControlName="identificacion"
                     id="identificacion">
@@ -23,13 +24,14 @@
                 <div class="formularioContenedor-item">
                     <label for="password">Contraseña</label>
                     <input
+                    class="textbox"
                     type="password"
                     formControlName="password"
                     id="password">
                 </div>
                 <div class="botonesFormulario">
-                    <button type="submit">Ingresar</button>
-                    <button type="button" (click)="agregarUsuario()">Registrar</button>
+                    <button class="buttonGrey | boton | botonIngresar" type="submit">Ingresar</button>
+                    <button class="buttonGrey | boton" type="button" (click)="abrirModalRegistro()">Registrar</button>
                 </div>
             </div>
         </form>

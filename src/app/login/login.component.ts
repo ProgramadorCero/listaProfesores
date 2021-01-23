@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormGroup, FormBuilder, Validators} from '@angular/forms';
-import { AuthServiceService } from '../compartidos/auth/auth-service.service';
+import {MatDialog} from '@angular/material/dialog';
+import { RegistrarComponent } from '../componentes/registrar/registrar.component';
 
 
 @Component({
@@ -10,14 +11,13 @@ import { AuthServiceService } from '../compartidos/auth/auth-service.service';
 })
 export class LoginComponent implements OnInit {
 
-  formularioLogin: FormGroup | undefined ;
+  formularioLogin!: FormGroup;
 
   constructor(
-    private auth: AuthServiceService,
-    private formularioB: FormBuilder
+    private formularioB: FormBuilder,
+    public dialog: MatDialog
     )
   {
-
   }
 
   ngOnInit(): void
@@ -33,14 +33,15 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  abrirModalRegistro(): void
+  {
+    this.dialog.open(RegistrarComponent, {width: '400px'});
+  }
+
   obtenerDatosFormularioLogin(form: any): void
   {
     console.log(form);
   }
 
-  agregarUsuario(): void
-  {
-    this.auth.agregarProfesor().subscribe( respuesta => console.log(respuesta));
-  }
 
 }
