@@ -9,7 +9,7 @@ export class ValidacionFormularioService {
     nombre: [
       { tipo: 'required', texto: 'El nombre es requerido'},
       { tipo: 'maxlength', texto: 'El limite de letra es de 20'},
-      { tipo: 'pattern', texto: 'El solo se permiten letras'},
+      { tipo: 'pattern', texto: 'El nombre solo permite letras'},
     ],
     identificacion: [
       { tipo: 'required', texto: 'La identificación es necesaria'},

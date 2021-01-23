@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ValidacionFormularioService } from 'src/app/compartidos/validacion-formulario/validacion-formulario.service';
 import { AuthServiceService } from '../../compartidos/auth/auth-service.service';
-
+declare let alertify: any;
 
 
 @Component({
@@ -31,8 +31,8 @@ export class RegistrarComponent implements OnInit {
   inicializarFormularioRegsitro(): void
   {
     this.formularioRegistro = this.formularioB.group({
-      nombre: ['', [Validators.required, Validators.maxLength(20), Validators.pattern(/^[a-zA-Z\s]*$/g)]],
-      identificacion: ['', [Validators.required, Validators.pattern(/[0-9]*/g)]],
+      nombre: ['', [Validators.required, Validators.maxLength(20), Validators.pattern(/^[a-z ]*$/i)]],
+      identificacion: ['', [Validators.required, Validators.pattern(/^[0-9]*$/s)]],
       password: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]]
     });
@@ -50,6 +50,8 @@ export class RegistrarComponent implements OnInit {
 
   obtenerDatosFormularioRegistro( elemento: FormGroup): void
   {
+    alertify.set('notifier', 'position', 'top-center');
+    alertify.success('Profesor registrado exitosamente');
     console.log(elemento);
   }
 

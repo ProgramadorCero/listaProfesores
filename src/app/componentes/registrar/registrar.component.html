@@ -16,7 +16,7 @@
                     <div *ngIf="
                     (formularioRegistro.get('nombre')?.dirty ||
                     formularioRegistro.get('nombre')?.touched ) &&
-                    formularioRegistro.get('nombre')?.getError(validacion.tipo)">
+                    formularioRegistro.get('nombre')?.hasError(validacion.tipo)">
                         <p class="errorValidacion">{{validacion.texto}}</p>
                     </div>
                 </div>
