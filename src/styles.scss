@@ -396,14 +396,14 @@ input[type=number]::-webkit-inner-spin-button {
 }
 
 .textbox {
-  padding: 8px ;
-  height: auto;
+  padding: 10px ;
+  height: 20px;
   background: #f2f2f2;
   color: #333;
   border: none;
   border-bottom: 1px solid #999;
   border-radius: 1px;
-  font-size: 15px;
+  font-size: 13px;
   outline: none;
   -webkit-transition: all 250ms ease-in;
   -moz-transition: all 250ms ease-in;
