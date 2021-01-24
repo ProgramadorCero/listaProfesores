@@ -12,8 +12,7 @@ export class ValidacionFormularioService {
       { tipo: 'pattern', texto: 'El nombre solo permite letras'},
     ],
     identificacion: [
-      { tipo: 'required', texto: 'La identificación es necesaria'},
-      { tipo: 'pattern', texto: 'La identificación no debe tener punto'}
+      { tipo: 'required', texto: 'La identificación es necesaria'}
     ],
     password: [{ tipo: 'required', texto: 'La contraseña es necesaria'}],
     email: [

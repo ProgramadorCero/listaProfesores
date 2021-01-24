@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { CrudProfesorService } from 'src/app/compartidos/service/crud-profesor.service';
 import { ValidacionFormularioService } from 'src/app/compartidos/validacion-formulario/validacion-formulario.service';
 import { AuthServiceService } from '../../compartidos/auth/auth-service.service';
 import { Profesor } from '../../compartidos/interfaces/profesor';
+import { ChangeDetectorRef } from '@angular/core';
 declare let alertify: any;
 
 
@@ -16,14 +18,16 @@ export class RegistrarComponent implements OnInit {
 
   formularioRegistro!: FormGroup;
   validacionFormularioRegistro = ValidacionFormularioService.validacionRegistro;
-  profesor!:Profesor;
+  profesor!: Profesor;
   constructor(
     private auth: AuthServiceService,
     public  modalReferencia: MatDialogRef <RegistrarComponent>,
-    public formularioB: FormBuilder
+    public formularioB: FormBuilder,
+    private crudProfesor: CrudProfesorService,
+    private cdRef: ChangeDetectorRef
     )
     {
-      console.log(this.validacionFormularioRegistro);
+
     }
 
   ngOnInit(): void {
@@ -34,7 +38,7 @@ export class RegistrarComponent implements OnInit {
   {
     this.formularioRegistro = this.formularioB.group({
       nombre: ['', [Validators.required, Validators.maxLength(20), Validators.pattern(/^[a-z ]*$/i)]],
-      identificacion: ['', [Validators.required, Validators.pattern(/^[0-9]*$/s)]],
+      identificacion: ['', [Validators.required]],
       password: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]]
     });
@@ -50,17 +54,18 @@ export class RegistrarComponent implements OnInit {
     this.auth.agregarProfesor().subscribe( respuesta => console.log(respuesta));
   }
 
-  obtenerDatosFormularioRegistro( elemento: FormGroup): void
+  validarDatosFormularioRegistro( elemento: FormGroup): void
   {
     if (this.formularioValido())
     {
       this.inicializarObjetoProfesor(elemento.value);
+      this.enviarDatosAlCrudProfesores();
     }
     else
     {
-      for (let propiedad in this.formularioRegistro.getRawValue())
+      // tslint:disable-next-line: forin
+      for (const propiedad in this.formularioRegistro.getRawValue())
       {
-        console.log(this.campoFormularioRegistroTieneError(propiedad))
         if (this.campoFormularioRegistroTieneError(propiedad))
         {
           this.mensajeDeErrorSegunElCampoRegistro(propiedad);
@@ -69,31 +74,31 @@ export class RegistrarComponent implements OnInit {
     }
   }
 
-  mensajeDeErrorSegunElCampoRegistro(propiedad:string): void
+  mensajeDeErrorSegunElCampoRegistro(propiedad: string): void
   {
     switch (propiedad)
     {
       case 'nombre':
         this.mensajeErrorAlertify('ERROR EN EL CAMPO NOMBRE');
-      break
+        break;
       case 'email':
         this.mensajeErrorAlertify('ERROR EN EL CAMPO CORREO ELECTRONICO');
-      break
+        break;
       case 'identificacion':
         this.mensajeErrorAlertify('ERROR EN EL CAMPO CORREO IDENTIFICACIÓN');
-      break
+        break;
       case 'password':
         this.mensajeErrorAlertify('ERROR EN EL CAMPO CORREO CONTRASEÑA');
-      break
+        break;
       default:
         console.log('no hay errores');
-      break
+        break;
     }
   }
 
-  mensajeErrorAlertify(mensaje: string):void
+  mensajeErrorAlertify(mensaje: string): void
   {
-    alertify.set('notifier','position', 'top-right');
+    alertify.set('notifier', 'position', 'top-right');
     alertify.error(mensaje);
   }
 
@@ -109,17 +114,55 @@ export class RegistrarComponent implements OnInit {
       identificacion: elemento.identificacion,
       password: elemento.password,
       email: elemento.email
-    }
-    console.log(this.profesor);
+    };
   }
 
   campoFormularioRegistroTieneError(nombreCampo: string): boolean
   {
-    if( this.formularioRegistro.get(nombreCampo)?.invalid)
+    if ( this.formularioRegistro.get(nombreCampo)?.invalid)
     {
       return true;
     }
     return false;
+  }
+
+  enviarDatosAlCrudProfesores(): void
+  {
+    this.crudProfesor.registrarProfesor(this.profesor)
+    .subscribe(
+      respuesta => {
+        console.log(respuesta);
+        this.cerrarModalRegistro();
+      },
+      error =>
+      this.mensajeErrorAlertify('Error en conexión a la base de datos ' + error)
+      );
+  }
+
+  validacionesEspesificasIdentificacion(cadena: string): boolean
+  {
+    if (cadena !== undefined && cadena !== null)
+    {
+      cadena = cadena.toString();
+      if (cadena.match(/\./g))
+      {
+        return true;
+      }
+      else
+      {
+        return false;
+      }
+    }
+    else
+    {
+      return false;
+    }
+  }
+
+  borrarCampo(nombreCampo: string): void
+  {
+    this.formularioRegistro.get(nombreCampo)?.setValue('');
+    this.cdRef.detectChanges();
   }
 
 }

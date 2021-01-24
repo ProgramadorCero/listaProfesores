@@ -2,7 +2,7 @@
     <h1 class="titulo" mat-dialog-title> Registrar Profesor </h1>
     <form class="formularioRegistro"
     [formGroup]="formularioRegistro"
-    (ngSubmit)="obtenerDatosFormularioRegistro(formularioRegistro)">
+    (ngSubmit)="validarDatosFormularioRegistro(formularioRegistro)">
         <div class="contenedorCampos">
             <div class="item-contenedorCampos">
                 <label for="nombre">Nombre</label>
@@ -25,7 +25,6 @@
             <div class="item-contenedorCampos">
                 <label for="identifiacion">Número de identificación</label>
                 <input
-                step="any"
                 class="textbox"
                 type="number"
                 id="identificacion"
@@ -37,6 +36,11 @@
                     formularioRegistro.get('identificacion')?.getError(validacion.tipo)">
                         <p class="errorValidacion">{{validacion.texto}}</p>
                     </div>
+                </div>
+                <div
+                *ngIf="validacionesEspesificasIdentificacion(
+                formularioRegistro.get('identificacion')?.value)">
+                    {{borrarCampo('identificacion')}}
                 </div>
             </div>
 
