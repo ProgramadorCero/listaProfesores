@@ -9,6 +9,9 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RegistrarComponent } from './componentes/registrar/registrar.component';
+import { ProfesorComponent } from './componentes/profesor/profesor.component';
+import { AgregarEstudianteComponent } from './componentes/agregar-estudiante/agregar-estudiante.component';
+
 
 
 
@@ -17,13 +20,15 @@ import { RegistrarComponent } from './componentes/registrar/registrar.component'
   declarations: [
     AppComponent,
     LoginComponent,
-    RegistrarComponent
+    RegistrarComponent,
+    ProfesorComponent,
+    AgregarEstudianteComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ImportsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { CrudProfesorService } from 'src/app/compartidos/service/crud-profesor.service';
 import { ValidacionFormularioService } from 'src/app/compartidos/validacion-formulario/validacion-formulario.service';
-import { AuthServiceService } from '../../compartidos/auth/auth-service.service';
 import { Profesor } from '../../compartidos/interfaces/profesor';
 import { ChangeDetectorRef } from '@angular/core';
+import { Subscription } from 'rxjs';
 declare let alertify: any;
 
 
@@ -14,13 +14,14 @@ declare let alertify: any;
   templateUrl: './registrar.component.html',
   styleUrls: ['./registrar.component.scss']
 })
-export class RegistrarComponent implements OnInit {
+export class RegistrarComponent implements OnInit, OnDestroy {
 
   formularioRegistro!: FormGroup;
   validacionFormularioRegistro = ValidacionFormularioService.validacionRegistro;
   profesor!: Profesor;
+  unSubscription!: Subscription;
+
   constructor(
-    private auth: AuthServiceService,
     public  modalReferencia: MatDialogRef <RegistrarComponent>,
     public formularioB: FormBuilder,
     private crudProfesor: CrudProfesorService,
@@ -34,6 +35,11 @@ export class RegistrarComponent implements OnInit {
     this.inicializarFormularioRegsitro();
   }
 
+  ngOnDestroy(): void
+  {
+    this.unSubscription.unsubscribe();
+  }
+
   inicializarFormularioRegsitro(): void
   {
     this.formularioRegistro = this.formularioB.group({
@@ -44,14 +50,9 @@ export class RegistrarComponent implements OnInit {
     });
   }
 
-  cerrarModalRegistro(): void
+  cerrarModalRegistro(dato?: string): void
   {
-    this.modalReferencia.close();
-  }
-
-  agregarUsuario(): void
-  {
-    this.auth.agregarProfesor().subscribe( respuesta => console.log(respuesta));
+    this.modalReferencia.close(dato);
   }
 
   validarDatosFormularioRegistro( elemento: FormGroup): void
@@ -128,11 +129,11 @@ export class RegistrarComponent implements OnInit {
 
   enviarDatosAlCrudProfesores(): void
   {
-    this.crudProfesor.registrarProfesor(this.profesor)
+   this.unSubscription = this.crudProfesor.registrarProfesor(this.profesor)
     .subscribe(
       respuesta => {
         console.log(respuesta);
-        this.cerrarModalRegistro();
+        this.cerrarModalRegistro('hola');
       },
       error =>
       this.mensajeErrorAlertify('Error en conexión a la base de datos ' + error)
@@ -164,5 +165,19 @@ export class RegistrarComponent implements OnInit {
     this.formularioRegistro.get(nombreCampo)?.setValue('');
     this.cdRef.detectChanges();
   }
+
+  soloNumerosEnElCampo(nombreCampo: string): void
+  {
+    const cadena: string = this.formularioRegistro.get(nombreCampo)?.value;
+    if (cadena)
+    {
+      if (!cadena.match(/^[0-9]*$/g))
+      {
+        const nuevaCadena = cadena.replace(/[\Wa-z_]*/gi, '');
+        this.formularioRegistro.get(nombreCampo)?.setValue(nuevaCadena);
+      }
+    }
+  }
+
 
 }

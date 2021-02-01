@@ -26,8 +26,9 @@
                 <label for="identifiacion">Número de identificación</label>
                 <input
                 class="textbox"
-                type="number"
+                type="text"
                 id="identificacion"
+                autocomplete="off"
                 formControlName="identificacion">
                 <div *ngFor="let validacion of validacionFormularioRegistro.identificacion">
                     <div *ngIf="
@@ -75,6 +76,9 @@
                     formularioRegistro.get('email')?.getError(validacion.tipo)">
                         <p class="errorValidacion">{{validacion.texto}}</p>
                     </div>
+                </div>
+                <div>
+                    {{soloNumerosEnElCampo('identificacion')}}
                 </div>
             </div>
         </div>

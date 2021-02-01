@@ -16,9 +16,12 @@
                     <label for="identificacion">Documento de identificación</label>
                     <input
                     class="textbox"
-                    type="number"
+                    type="text"
                     formControlName="identificacion"
                     id="identificacion">
+                    <div>
+                        {{soloNumerosEnElCampo('identificacion')}}
+                    </div>
                 </div>
 
                 <div class="formularioContenedor-item">
@@ -38,3 +41,4 @@
     </div>
 
 </div>
+

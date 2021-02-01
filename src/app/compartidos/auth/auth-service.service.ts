@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import { Observable } from 'rxjs';
+
 
 
 @Injectable({
@@ -8,14 +7,24 @@ import { Observable } from 'rxjs';
 })
 export class AuthServiceService {
 
-  header: HttpHeaders = new HttpHeaders (
-    {'Content-type': 'application/json'}
-    );
-  constructor(private http: HttpClient) { }
 
-  agregarProfesor(): Observable<any>
+  constructor()
   {
-    const url = 'http://localhost/php/index.php';
-    return  this.http.post(url, { 'hola' : 'mundo'}, {headers: this.header});
   }
+
+  guardarIdentificacionLocalStorage(identificacion: string): void
+  {
+    localStorage.setItem('identificacion', identificacion);
+  }
+
+  eliminarIdentificacionLocalStorage(): void
+  {
+    localStorage.removeItem('identificacion');
+  }
+
+  obtenerIdentificacionLocalStorage(): string | null
+  {
+    return localStorage.getItem('identificacion');
+  }
+
 }
