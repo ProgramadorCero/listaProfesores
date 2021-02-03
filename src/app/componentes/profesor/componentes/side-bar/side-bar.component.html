@@ -1,0 +1,40 @@
+<div class="contenedor">
+    <div class="icono">
+        <div class="letra"> D</div>
+    </div>
+    <div class="opciones">
+        <ul id="lista">
+            <li
+                (click)="enviarOpcionElegidaAComponenteProfesor('listas')"
+                class="item-opciones"
+            >
+                Listas
+            </li>
+            <li
+                (click)="enviarOpcionElegidaAComponenteProfesor('agregar')"
+                class="item-opciones"
+            >
+                Agregar
+            </li>
+            <li
+                (click)="enviarOpcionElegidaAComponenteProfesor('descargar')"
+                class="item-opciones"
+            >
+             Descargar Lista
+            </li>
+            <li
+            (click)="enviarOpcionElegidaAComponenteProfesor('driver')"
+            class="item-opciones"
+            >
+                Guardar Lista En Driver
+            </li>
+            <li
+                (click)="enviarOpcionElegidaAComponenteProfesor('salir')"
+                class="item-opciones"
+            >
+                Salir
+            </li>
+        </ul>
+    </div>
+</div>
+

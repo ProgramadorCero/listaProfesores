@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfesorComponent implements OnInit {
 
+  opcionSideBar = 'Bienvenido';
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  opcionElegidaSideBar(e: string): void
+  {
+    this.opcionSideBar = e;
   }
 
 }

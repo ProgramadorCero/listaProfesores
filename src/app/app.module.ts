@@ -10,7 +10,8 @@ import { LoginComponent } from './login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RegistrarComponent } from './componentes/registrar/registrar.component';
 import { ProfesorComponent } from './componentes/profesor/profesor.component';
-import { AgregarEstudianteComponent } from './componentes/agregar-estudiante/agregar-estudiante.component';
+import { SideBarComponent } from './componentes/profesor/componentes/side-bar/side-bar.component';
+import { HeaderComponent } from './componentes/profesor/componentes/header/header.component';
 
 
 
@@ -22,7 +23,8 @@ import { AgregarEstudianteComponent } from './componentes/agregar-estudiante/agr
     LoginComponent,
     RegistrarComponent,
     ProfesorComponent,
-    AgregarEstudianteComponent,
+    SideBarComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,
