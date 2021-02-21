@@ -27,6 +27,7 @@ export class LoginComponent implements OnInit {
     )
   {
     this.auth.eliminarIdentificacionLocalStorage();
+    this.auth.finalizarSession().subscribe();
   }
 
   ngOnInit(): void
@@ -82,7 +83,7 @@ export class LoginComponent implements OnInit {
     }
     else
     {
-      this.auth.guardarIdentificacionLocalStorage(result.identificacion);
+      this.auth.guardarIdentificacionLocalStorage(result.idSession);
       this.router.navigateByUrl('/profesor');
     }
   }

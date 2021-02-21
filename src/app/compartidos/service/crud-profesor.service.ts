@@ -26,4 +26,5 @@ export class CrudProfesorService {
     const url = 'http://localhost/php/validarIngresoUsuario.php';
     return this.http.post(url, profesor, {headers: this.header});
   }
+
 }

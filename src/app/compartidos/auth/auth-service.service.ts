@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 
 
@@ -7,24 +9,39 @@ import { Injectable } from '@angular/core';
 })
 export class AuthServiceService {
 
-
-  constructor()
+  header: HttpHeaders = new HttpHeaders({ 'Content-Type': 'application/js'});
+  prueba?: any;
+  urlServidor = 'http://localhost/php/';
+  constructor(private http: HttpClient)
   {
+    this.usuarioLoggeado();
   }
 
-  guardarIdentificacionLocalStorage(identificacion: string): void
+  guardarIdentificacionLocalStorage(id: string): void
   {
-    localStorage.setItem('identificacion', identificacion);
+    localStorage.setItem('idSession', id);
   }
 
   eliminarIdentificacionLocalStorage(): void
   {
-    localStorage.removeItem('identificacion');
+    localStorage.removeItem('idSession');
   }
 
   obtenerIdentificacionLocalStorage(): string | null
   {
-    return localStorage.getItem('identificacion');
+    return localStorage.getItem('idSession');
+  }
+
+  usuarioLoggeado(): Promise<any>
+  {
+    const url = `${this.urlServidor}verificacionLoguin.php`;
+    return this.http.get(url, {headers: this.header}).toPromise();
+  }
+
+  finalizarSession(): Observable<any>
+  {
+    const url = `${this.urlServidor}finalizarSeccion.php`;
+    return this.http.get(url, {headers: this.header});
   }
 
 }

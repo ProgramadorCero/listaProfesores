@@ -1,0 +1,99 @@
+<div class="contenedorEstudiante">
+    <div class="header">
+        Agregar Estudiante
+    </div>
+    <div class="contenido">
+        <form [formGroup]="agregarForm" (ngSubmit)="validarFormulario(agregarForm, 'agregar')">
+            <div class="camposEstudiante">
+                <div class="item-camposEstudiante">
+                    <label class="etiquetas" for="identificacion">Identificación</label>
+                    <input class="textbox" autocomplete="off"
+                    formControlName="identificacion" type="text" id="identificacion">
+                </div>
+
+                <div class="item-camposEstudiante">
+                    <label class="etiquetas" for="nombre">Nombres</label>
+                    <input class="textbox" autocomplete="off"
+                    formControlName="nombre" type="text" id="nombre">
+                </div>
+
+                <div class="item-camposEstudiante">
+                    <label class="etiquetas" for="apellidos">Apellidos</label>
+                    <input class="textbox" autocomplete="off"
+                    formControlName="apellido" type="text" id="apellidos">
+                </div>
+
+                <div class="botones | item-camposEstudiante">
+                    <button
+                    type="submit">Agregar</button>
+                </div>
+                {{validarCampos(agregarForm)}}
+            </div>
+        </form>
+    </div>
+
+    <div class="conetenedorListar" *ngIf="noActulizandoEstudiante">
+        <div class="tituloListarEstudiantes | header">
+            Listar Estudiantes
+        </div>
+        <div class="contenidoListarEstudiantes | contenido">
+            <div class="contenedorBuscador">
+                <input
+                [(ngModel)]='valorDelBuscador'
+                (input)="filtrarEstudiantesEnLaLista()"
+                id="buscador"
+                class="buscador"
+                type="search"
+                placeholder="BUSCAR ESTUDIANTE">
+            </div>
+            <div class="contenedorLista">
+                <div class="lista" *ngFor='let estudiante of listaEstudiantesFiltrados'>
+                    <div class="item-lista | grid1"> <span>Nombre: </span> {{estudiante.nombres}} {{estudiante.apellidos}} </div>
+                    <div class="item-lista | grid2"> <span> Identificación: </span> {{estudiante.identificacion}} </div>
+                    <div class="item-lista | grid3">
+                        <button
+                        (click)="colocarDatosDelEstudianteEnFormularioActualizar(estudiante)"
+                        class="actualizar">Actualizar</button></div>
+                    <div class="item-lista | grid4">
+                        <button class="eliminar" (click)="eliminarEstudiante(estudiante.identificacion)">Eliminar</button></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="contenedorAcualizar" *ngIf="!noActulizandoEstudiante">
+        <div class="tituloActualizarEstudiante | header"> Actualizar Estudiante</div>
+        <div class="contenido">
+            <form [formGroup]="actualizarForm" (ngSubmit)="validarFormulario(actualizarForm, 'actualizar')">
+                <div class="camposEstudiante">
+                    <div class="item-camposEstudiante">
+                        <label class="etiquetas" for="identificacion">Identificación</label>
+                        <input
+                            class="textbox" formControlName="identificacion"
+                            [disabled]="true" type="text" id="identificacion">
+                    </div>
+
+                    <div class="item-camposEstudiante">
+                        <label class="etiquetas" for="nombre">Nombres</label>
+                        <input class="textbox" formControlName="nombre" type="text" id="nombre">
+                    </div>
+
+                    <div class="item-camposEstudiante">
+                        <label class="etiquetas" for="apellidos">Apellidos</label>
+                        <input class="textbox" formControlName="apellido" type="text" id="apellidos">
+                    </div>
+
+                    <div class="botones | item-camposEstudiante">
+                        <button type="submit">Actualizar</button>
+                    </div>
+                    <div class="botones | item-camposEstudiante">
+                        <button type="button" (click)="regresarAlaLista()">Volver</button>
+                    </div>
+                </div>
+                {{validarCampos(actualizarForm)}}
+            </form>
+        </div>
+
+    </div>
+</div>

@@ -12,6 +12,8 @@ import { RegistrarComponent } from './componentes/registrar/registrar.component'
 import { ProfesorComponent } from './componentes/profesor/profesor.component';
 import { SideBarComponent } from './componentes/profesor/componentes/side-bar/side-bar.component';
 import { HeaderComponent } from './componentes/profesor/componentes/header/header.component';
+import { AgregarComponent } from './componentes/agregar/agregar.component';
+import { InstitucionComponent } from './componentes/institucion/institucion.component';
 
 
 
@@ -25,6 +27,8 @@ import { HeaderComponent } from './componentes/profesor/componentes/header/heade
     ProfesorComponent,
     SideBarComponent,
     HeaderComponent,
+    AgregarComponent,
+    InstitucionComponent,
   ],
   imports: [
     BrowserModule,

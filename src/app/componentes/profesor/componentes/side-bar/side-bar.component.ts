@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -10,7 +11,7 @@ export class SideBarComponent implements OnInit {
 
   @Output() opcion = new EventEmitter();
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
     this.seleccionarLista();
@@ -26,19 +27,19 @@ export class SideBarComponent implements OnInit {
   {
     if (hijoSeleccionado.target.classList.value !== 'item-opciones-clic')
     {
-      const lista: any = document.getElementById('lista');
+      /*const lista: any = document.getElementById('lista');
       const listaHijos: any [] = lista.childNodes;
       listaHijos.forEach( hijo => this.cambiarLaClaseDeLosHijos(hijo));
-      this.cambiarClaseDelNodo(hijoSeleccionado, 'item-opciones', 'item-opciones-clic' );
+      this.cambiarClaseDelNodo(hijoSeleccionado, 'item-opciones', 'item-opciones-clic' );*/
     }
   }
 
   cambiarLaClaseDeLosHijos(hijo: any): void
   {
-    if (hijo.classList.value === 'item-opciones-clic')
+    /*if (hijo.classList.value === 'item-opciones-clic')
     {
       hijo.classList.replace('item-opciones-clic', 'item-opciones');
-    }
+    }*/
   }
 
   cambiarClaseDelNodo(hijoSeleccionado: any, claseAntigua: string, claseNueva: string): void
@@ -48,7 +49,8 @@ export class SideBarComponent implements OnInit {
 
   enviarOpcionElegidaAComponenteProfesor(opcion: string): void
   {
-    this.opcion.emit(opcion);
+    const urlHijosProfesor = `./profesor/${opcion}`;
+    this.opcion.emit(urlHijosProfesor);
   }
 
 }

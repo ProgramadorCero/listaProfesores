@@ -4,31 +4,45 @@
     </div>
     <div class="opciones">
         <ul id="lista">
+
             <li
+                routerLink="/profesor/agregar"
+                routerLinkActive="selected"
+                (click)="enviarOpcionElegidaAComponenteProfesor('agregar')"
+                class="item-opciones"
+            >
+                Estudiante
+            </li>
+
+            <li
+                routerLink="/profesor/institucion"
+                routerLinkActive="selected"
+                (click)="enviarOpcionElegidaAComponenteProfesor('institucion')"
+                class="item-opciones"
+            >
+                Institución
+            </li>
+
+            <li
+                routerLink="/profesor/listas"
+                routerLinkActive="selected"
                 (click)="enviarOpcionElegidaAComponenteProfesor('listas')"
                 class="item-opciones"
             >
                 Listas
             </li>
+
             <li
-                (click)="enviarOpcionElegidaAComponenteProfesor('agregar')"
-                class="item-opciones"
-            >
-                Agregar
-            </li>
-            <li
+                routerLink="/profesor/descargar"
+                routerLinkActive="selected"
                 (click)="enviarOpcionElegidaAComponenteProfesor('descargar')"
                 class="item-opciones"
             >
              Descargar Lista
             </li>
             <li
-            (click)="enviarOpcionElegidaAComponenteProfesor('driver')"
-            class="item-opciones"
-            >
-                Guardar Lista En Driver
-            </li>
-            <li
+                routerLink="/profesor/salir"
+                routerLinkActive="selected"
                 (click)="enviarOpcionElegidaAComponenteProfesor('salir')"
                 class="item-opciones"
             >
